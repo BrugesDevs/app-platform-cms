@@ -1,0 +1,20 @@
+<form #newsItemForm="ngForm">
+  <p>
+    <button #saveButton type="submit" (click)="save()" mat-raised-button>{{saveButtonText}}</button>
+    <button (click)="goBack()" mat-raised-button>go back</button>
+  </p>
+  <mat-form-field>
+    <input matInput placeholder="Titel" type="text" class="form-control" id="title" name="title"
+           [(ngModel)]="newsItem.title" value="{{ newsItem.title }}">
+  </mat-form-field>
+  <mat-form-field style="margin-left: 40px;">
+    <input matInput placeholder="Onderwerp" type="text" class="form-control" id="subject" name="subject"
+           [(ngModel)]="newsItem.subject" value="{{ newsItem.subject }}">
+  </mat-form-field>
+  <br/>
+  <mat-form-field style="width: 600px;" class="form-control">
+    <textarea matInput matTextareaAutosize placeholder="Inhoud van het artikel" name="content"
+              class="form-control" id="content" [(ngModel)]="newsItem.content">{{ newsItem.content }}</textarea>
+  </mat-form-field>
+  <!--<uploads-list></uploads-list>-->
+</form>
