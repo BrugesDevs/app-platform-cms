@@ -32,14 +32,22 @@ export class NewsItemFacade {
   }
 
   verwijderNewsItem(newsItem: NewsItem) {
-    this.newsItems.splice(this.newsItems.indexOf(newsItem, 1));
-    this.newsItemService.deleteNewsItem(newsItem)
-      .subscribe((isDeleted: boolean) => {
-        if (!isDeleted) {
-          this.newsItems.push(newsItem);
-        }
-        this.events.publish(EventChannels.CHANNEL_NEWS_ITEM_DELETED, newsItem);
-      });
+    /*Optimistic revoval of item*/
+    var index = this.newsItems.indexOf(newsItem, 0);
+    if (index > -1) {
+      this.newsItems.splice(index, 1);
+
+      this.newsItemService.deleteNewsItem(newsItem)
+        .subscribe((isDeleted: boolean) => {
+          //TODO IF ITEM IS NOT DELETED FROM API PUSH IT BACK IN THE LIST
+          // if (!isDeleted) {
+          //   this.newsItems.push(newsItem);
+          // }
+          this.events.publish(EventChannels.CHANNEL_NEWS_ITEM_DELETED, newsItem);
+        });
+    } else {
+      console.error("Inconsistent state while delete newsItem: ", newsItem);
+    }
   }
 
   saveNewsItem(newsItem: NewsItem) {
@@ -52,6 +60,7 @@ export class NewsItemFacade {
   addNewsItem(newsItem: NewsItem) {
     this.newsItemService.addNewsItem(newsItem)
       .subscribe((addedNewsItem: NewsItem) => {
+        //TODO CHECK IF ID IS PRESENT
         this.newsItems.splice(this.newsItems.indexOf(newsItem), 1);
         this.newsItems.push(addedNewsItem);
         this.events.publish(EventChannels.CHANNEL_NEWS_ITEM_CREATED, addedNewsItem);
