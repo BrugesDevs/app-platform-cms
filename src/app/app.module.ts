@@ -12,10 +12,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NewsItemsComponent} from "../pages/news-items/news-items.component";
 import {NewsItemDetailComponent} from "../pages/news-item-detail/news-item-detail.component";
-import {NewsItemFacade} from "../core/facade/news-item.facade";
 import {NewsItemService} from "../core/service/news-item.service";
-import {NewsItemControllerService} from "../providers";
+import {NewsItemControllerService, PlayerControllerService} from "../providers";
 import {HttpClientModule} from "@angular/common/http";
+import {PlayerFacade} from "../core/facade/player.facade";
+import {PlayerService} from "../core/service/player.service";
+import {NewsItemFacade} from "../core/facade/news-item.facade";
+import {Players} from "../pages/players/players";
+import {PlayerDetail} from "../pages/player-detail/player-detail";
 
 @NgModule({
   declarations: [
@@ -24,7 +28,9 @@ import {HttpClientModule} from "@angular/common/http";
     ContactPage,
     TabsPage,
     NewsItemsComponent,
-    NewsItemDetailComponent
+    NewsItemDetailComponent,
+    Players,
+    PlayerDetail
   ],
   imports: [
     BrowserModule,
@@ -39,12 +45,17 @@ import {HttpClientModule} from "@angular/common/http";
     ContactPage,
     TabsPage,
     NewsItemsComponent,
-    NewsItemDetailComponent
+    NewsItemDetailComponent,
+    Players,
+    PlayerDetail
   ],
   providers: [
+    PlayerFacade,
+    PlayerService,
     NewsItemFacade,
     NewsItemService,
     NewsItemControllerService,
+    PlayerControllerService,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

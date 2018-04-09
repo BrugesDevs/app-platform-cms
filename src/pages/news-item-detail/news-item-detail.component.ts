@@ -1,6 +1,4 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {NewsItemService} from '../../core/service/news-item.service';
-import {Location} from '@angular/common';
 import {NewsItem} from '../../providers/index';
 import {NavigationParams} from "../../core/constants/navigation-params";
 import {Events, NavController, NavParams, ToastController} from "ionic-angular";

@@ -1,18 +1,40 @@
-<!--
-  Generated template for the Players page.
+<ion-content class="content" padding>
+  <button ion-button (click)="addPlayer()" color="secondary" style="margin-bottom: 20px;">
+    + Voeg speler toe
+  </button>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <ion-navbar>
-    <ion-title>players</ion-title>
-  </ion-navbar>
+  <ion-list *ngFor="let player of playerFacade.players" style="margin-bottom: 20px;">
+    <ion-card>
+      <div style="display: flex; flex-direction: row;">
+        <div style="width: 75%;">
+          <ion-card-header class="planned-visits__card-title">
+            <p style="display: flex; flex-direction: row">
+              {{player.firstName}}
+            </p>
+          </ion-card-header>
+          <ion-card-content>
+            <p class="planned-visits__card-content">
 
-</ion-header>
+            </p>
+            <p class="planned-visits__card-content-inline">
 
-
-<ion-content padding>
-
+            </p>
+          </ion-card-content>
+        </div>
+        <div style="display: flex; width: auto;">
+          <div class="planned-visits__card-content-button-container" (click)="bewerken(player)" tappable>
+            <p class="planned-visits__card-content-button">Bewerken</p>
+          </div>
+          <div class="planned-visits__card-content-button-container" (click)="verwijderen(player)" tappable>
+            <p class="planned-visits__card-content-button">Verwijderen</p>
+          </div>
+        </div>
+      </div>
+    </ion-card>
+  </ion-list>
 </ion-content>
+

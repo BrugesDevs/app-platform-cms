@@ -1,0 +1,16 @@
+<p>
+  <button ion-button type="submit" (click)="save()">{{saveButtonText}}</button>
+  <button (click)="goBack()" ion-button>go back</button>
+</p>
+<ion-item>
+  <ion-label>Voornaam</ion-label>
+  <ion-input type="text" [(ngModel)]="player.firstName"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label>Familienaam</ion-label>
+  <ion-input type="text" [(ngModel)]="player.lastName"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label>Spelersnummer</ion-label>
+  <ion-input type="text" [(ngModel)]="player.playerNumber"></ion-input>
+</ion-item>

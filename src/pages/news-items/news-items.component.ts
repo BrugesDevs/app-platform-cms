@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NewsItemFacade} from '../../core/facade/news-item.facade';
 import {Events, NavController, Refresher, ToastController} from "ionic-angular";
 import {NewsItemDetailComponent} from "../news-item-detail/news-item-detail.component";
 import {NewsItem} from "../../providers";
 import {EventChannels} from "../../core/constants/event-channels";
+import {NewsItemFacade} from "../../core/facade/news-item.facade";
 
 @Component({
   selector: 'app-news-items',
