@@ -14,6 +14,6 @@
 export class NewsItem {
     content?: string;
     id?: number;
-    title?: string;
     subject?: string;
+    title?: string;
 }

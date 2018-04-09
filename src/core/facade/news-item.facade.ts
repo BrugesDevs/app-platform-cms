@@ -1,20 +1,17 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {NewsItemService} from '../service/news-item.service';
 import {NewsItem} from '../../providers/index';
 import {Events} from "ionic-angular";
 import {EventChannels} from "../constants/event-channels";
 
 @Injectable()
-export class NewsItemFacade implements OnInit {
+export class NewsItemFacade {
 
   newsItems: NewsItem[] = [];
   currentNewsItem: NewsItem;
 
   constructor(private newsItemService: NewsItemService, private events: Events) {
 
-  }
-
-  ngOnInit(): void {
   }
 
   loadNewsItems(): void {
@@ -26,35 +23,38 @@ export class NewsItemFacade implements OnInit {
       .subscribe((loadedNewsItems: NewsItem[]) => this.newsItems = loadedNewsItems);
   }
 
+  loadNewsItem(newsItemId: number) {
+    this.newsItemService.getNewsItem(newsItemId)
+      .subscribe(value => {
+        this.currentNewsItem = value;
+        this.events.publish(EventChannels.CHANNEL_NEWS_ITEM_LOADED);
+      })
+  }
+
   verwijderNewsItem(newsItem: NewsItem) {
     this.newsItems.splice(this.newsItems.indexOf(newsItem, 1));
     this.newsItemService.deleteNewsItem(newsItem)
       .subscribe((isDeleted: boolean) => {
         if (!isDeleted) {
           this.newsItems.push(newsItem);
-        } else {
-          console.log("Deleted newsItem: ", newsItem);
         }
+        this.events.publish(EventChannels.CHANNEL_NEWS_ITEM_DELETED, newsItem);
       });
   }
 
   saveNewsItem(newsItem: NewsItem) {
     this.newsItemService.saveNewsItem(newsItem)
       .subscribe((isSaved: boolean) => {
-        if(isSaved) {
-          console.log("Saved newsItem");
-        } else{
-          console.log('Failed to save newsitem');
-        }
+        this.events.publish(EventChannels.CHANNEL_NEWS_ITEM_UPDATED, isSaved);
       });
   }
 
   addNewsItem(newsItem: NewsItem) {
     this.newsItemService.addNewsItem(newsItem)
       .subscribe((addedNewsItem: NewsItem) => {
-        console.log("Added newsItem: ", addedNewsItem);
         this.newsItems.splice(this.newsItems.indexOf(newsItem), 1);
         this.newsItems.push(addedNewsItem);
+        this.events.publish(EventChannels.CHANNEL_NEWS_ITEM_CREATED, addedNewsItem);
       });
   }
 }
