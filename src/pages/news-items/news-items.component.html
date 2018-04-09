@@ -1,0 +1,41 @@
+
+<ion-content class="content" padding>
+  <button ion-button (click)="addNewsItem()" color="secondary" style="margin-bottom: 20px;">
+    + Voeg nieuws toe
+  </button>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)" >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngFor="let newsItem of newsItemsFacade.newsItems" style="margin-bottom: 20px;">
+    <ion-card>
+      <div style="display: flex; flex-direction: row;">
+        <div style="width: 75%;">
+          <ion-card-header class="planned-visits__card-title">
+            <p style="display: flex; flex-direction: row">
+              {{newsItem.title}}
+            </p>
+          </ion-card-header>
+          <ion-card-content>
+            <p class="planned-visits__card-content">
+              {{newsItem.subject}}
+            </p>
+            <p class="planned-visits__card-content-inline">
+
+            </p>
+          </ion-card-content>
+        </div>
+        <div style="display: flex; width: auto;">
+          <div class="planned-visits__card-content-button-container" (click)="bewerken(newsItem)" tappable>
+            <p class="planned-visits__card-content-button">Bewerken</p>
+          </div>
+          <div class="planned-visits__card-content-button-container" (click)="verwijderen(newsItem)" tappable>
+            <p class="planned-visits__card-content-button">Verwijderen</p>
+          </div>
+        </div>
+      </div>
+    </ion-card>
+  </ion-list>
+</ion-content>
+

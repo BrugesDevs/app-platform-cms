@@ -1,0 +1,16 @@
+<p>
+  <button ion-button type="submit" (click)="save()">{{saveButtonText}}</button>
+  <button (click)="goBack()" ion-button>go back</button>
+</p>
+<ion-item>
+  <ion-label>Titel</ion-label>
+  <ion-input type="text" [(ngModel)]="newsItem.title"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label>Onderwerp</ion-label>
+  <ion-input type="text" [(ngModel)]="newsItem.subject"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label>Inhoud</ion-label>
+  <ion-input type="text" [(ngModel)]="newsItem.content"></ion-input>
+</ion-item>

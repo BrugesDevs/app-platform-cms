@@ -1,0 +1,35 @@
+ion-card{
+
+  $ion-card__text-color: #808080;
+
+  .planned-visits__card-title {
+    padding-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .planned-visits__card-content {
+    color: $ion-card__text-color;
+  }
+
+  .planned-visits__card-content-inline {
+    @extend .planned-visits__card-content;
+    display: inline-block;
+  }
+
+  .planned-visits__card-content-button-container {
+    display: flex;
+    align-items: center;
+    //height: 100%;
+    border-left: #b4b4b4 solid thin;
+    border-color: rgba(189,191,193, 0.6);
+  }
+
+  .card-button {
+    color: map-get($colors, myBlue);
+    font-weight: 500;
+    font-size: 1.4rem;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+}

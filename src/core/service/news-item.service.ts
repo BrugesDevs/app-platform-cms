@@ -1,4 +1,4 @@
-import {NewsItem, NewsItemControllerService} from '../providers/index';
+import {NewsItem, NewsItemControllerService} from '../../providers/index';
 import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
 import "rxjs/add/operator/map";
@@ -9,7 +9,7 @@ export class NewsItemService {
   constructor(private newsItemControllerService: NewsItemControllerService) {
   }
 
-  addNewsItem(item: NewsItem) {
+  addNewsItem(item: NewsItem): Observable<NewsItem> {
     return this.newsItemControllerService.createNewsItemUsingPOST(item)
       .map(value => {
         console.log('Added newsItem: ', value);
