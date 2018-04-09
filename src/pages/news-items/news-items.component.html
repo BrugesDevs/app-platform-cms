@@ -1,10 +1,9 @@
-
 <ion-content class="content" padding>
   <button ion-button (click)="addNewsItem()" color="secondary" style="margin-bottom: 20px;">
     + Voeg nieuws toe
   </button>
 
-  <ion-refresher (ionRefresh)="doRefresh($event)" >
+  <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
@@ -14,15 +13,15 @@
         <div style="width: 75%;">
           <ion-card-header class="planned-visits__card-title">
             <p style="display: flex; flex-direction: row">
-              {{newsItem.title}}
+              Titel: {{newsItem.title}}
             </p>
           </ion-card-header>
           <ion-card-content>
             <p class="planned-visits__card-content">
-              {{newsItem.subject}}
+              Onderwerp: {{newsItem.subject}}
             </p>
             <p class="planned-visits__card-content-inline">
-
+              Aangemaakt op {{newsItem.createdDate | date : 'dd/MM/yyyy'}}
             </p>
           </ion-card-content>
         </div>

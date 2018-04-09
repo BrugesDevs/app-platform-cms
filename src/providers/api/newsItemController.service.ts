@@ -63,9 +63,9 @@ export class NewsItemControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createNewsItemUsingPOST(newsitem: NewsItem, observe?: 'body', reportProgress?: boolean): Observable<NewsItem>;
-    public createNewsItemUsingPOST(newsitem: NewsItem, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewsItem>>;
-    public createNewsItemUsingPOST(newsitem: NewsItem, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewsItem>>;
+    public createNewsItemUsingPOST(newsitem: NewsItem, observe?: 'body', reportProgress?: boolean): Observable<number>;
+    public createNewsItemUsingPOST(newsitem: NewsItem, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<number>>;
+    public createNewsItemUsingPOST(newsitem: NewsItem, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<number>>;
     public createNewsItemUsingPOST(newsitem: NewsItem, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (newsitem === null || newsitem === undefined) {
             throw new Error('Required parameter newsitem was null or undefined when calling createNewsItemUsingPOST.');
@@ -91,7 +91,7 @@ export class NewsItemControllerService {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
 
-        return this.httpClient.post<NewsItem>(`${this.basePath}/news-items`,
+        return this.httpClient.post<number>(`${this.basePath}/news-items`,
             newsitem,
             {
                 withCredentials: this.configuration.withCredentials,

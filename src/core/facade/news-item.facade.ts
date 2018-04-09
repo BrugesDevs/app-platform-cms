@@ -59,11 +59,10 @@ export class NewsItemFacade {
 
   addNewsItem(newsItem: NewsItem) {
     this.newsItemService.addNewsItem(newsItem)
-      .subscribe((addedNewsItem: NewsItem) => {
-        //TODO CHECK IF ID IS PRESENT
-        this.newsItems.splice(this.newsItems.indexOf(newsItem), 1);
-        this.newsItems.push(addedNewsItem);
-        this.events.publish(EventChannels.CHANNEL_NEWS_ITEM_CREATED, addedNewsItem);
+      .subscribe((addedId: number) => {
+        newsItem.id = addedId;
+        this.newsItems.push(newsItem);
+        this.events.publish(EventChannels.CHANNEL_NEWS_ITEM_CREATED, newsItem);
       });
   }
 }

@@ -12,8 +12,9 @@
 
 
 export class NewsItem {
-    content?: string;
-    id?: number;
-    subject?: string;
-    title?: string;
+  content?: string;
+  createdDate?: string;
+  id?: number;
+  subject?: string;
+  title?: string;
 }

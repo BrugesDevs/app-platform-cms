@@ -9,7 +9,7 @@ export class NewsItemService {
   constructor(private newsItemControllerService: NewsItemControllerService) {
   }
 
-  addNewsItem(item: NewsItem): Observable<NewsItem> {
+  addNewsItem(item: NewsItem): Observable<number> {
     return this.newsItemControllerService.createNewsItemUsingPOST(item)
       .map(value => {
         console.log('Added newsItem: ', value);
