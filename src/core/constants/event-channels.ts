@@ -9,4 +9,12 @@ export class EventChannels{
   public static CHANNEL_NEWS_ITEM_UPDATED: string = 'news-item:updated';
   public static CHANNEL_NEWS_ITEM_CREATED: string = 'news-item:created';
   public static CHANNEL_NEWS_ITEM_DELETED: string = 'news-item:deleted';
+
+  public static CHANNEL_PLAYERS_UPDATE: string = 'players:update';
+  public static CHANNEL_PLAYERS_HIDE_REFRESHER: string = 'players:refresher:hide';
+
+  public static CHANNEL_PLAYER_LOADED: string = 'player:loaded';
+  public static CHANNEL_PLAYER_UPDATED: string = 'player:updated';
+  public static CHANNEL_PLAYER_CREATED: string = 'player:created';
+  public static CHANNEL_PLAYER_DELETED: string = 'player:deleted';
 }

@@ -63,9 +63,9 @@ export class PlayerControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createPlayerUsingPOST(player: Player, observe?: 'body', reportProgress?: boolean): Observable<Player>;
-    public createPlayerUsingPOST(player: Player, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Player>>;
-    public createPlayerUsingPOST(player: Player, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Player>>;
+    public createPlayerUsingPOST(player: Player, observe?: 'body', reportProgress?: boolean): Observable<number>;
+    public createPlayerUsingPOST(player: Player, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<number>>;
+    public createPlayerUsingPOST(player: Player, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<number>>;
     public createPlayerUsingPOST(player: Player, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (player === null || player === undefined) {
             throw new Error('Required parameter player was null or undefined when calling createPlayerUsingPOST.');
