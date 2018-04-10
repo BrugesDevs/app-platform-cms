@@ -16,5 +16,13 @@ export class EventChannels{
   public static CHANNEL_PLAYER_LOADED: string = 'player:loaded';
   public static CHANNEL_PLAYER_UPDATED: string = 'player:updated';
   public static CHANNEL_PLAYER_CREATED: string = 'player:created';
-  public static CHANNEL_PLAYER_DELETED: string = 'player:deleted';
+  public static CHANNEL_PLAYER_DELETED: string = 'player:deleted'
+
+  public static CHANNEL_TEAMS_UPDATE: string = 'teams:update';
+  public static CHANNEL_TEAMS_HIDE_REFRESHER: string = 'teams:refresher:hide';
+
+  public static CHANNEL_TEAM_LOADED: string = 'team:loaded';
+  public static CHANNEL_TEAM_UPDATED: string = 'team:updated';
+  public static CHANNEL_TEAM_CREATED: string = 'team:created';
+  public static CHANNEL_TEAM_DELETED: string = 'team:deleted';
 }

@@ -13,13 +13,17 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NewsItemsComponent} from "../pages/news-items/news-items.component";
 import {NewsItemDetailComponent} from "../pages/news-item-detail/news-item-detail.component";
 import {NewsItemService} from "../core/service/news-item.service";
-import {NewsItemControllerService, PlayerControllerService} from "../providers";
+import {NewsItemControllerService, PlayerControllerService, TeamControllerService} from "../providers";
 import {HttpClientModule} from "@angular/common/http";
 import {PlayerFacade} from "../core/facade/player.facade";
 import {PlayerService} from "../core/service/player.service";
 import {NewsItemFacade} from "../core/facade/news-item.facade";
 import {Players} from "../pages/players/players";
 import {PlayerDetail} from "../pages/player-detail/player-detail";
+import {TeamService} from "../core/service/team.service";
+import {TeamFacade} from "../core/facade/team.facade";
+import {TeamDetail} from "../pages/team-detail/team-detail";
+import {Teams} from "../pages/teams/teams";
 
 @NgModule({
   declarations: [
@@ -30,7 +34,9 @@ import {PlayerDetail} from "../pages/player-detail/player-detail";
     NewsItemsComponent,
     NewsItemDetailComponent,
     Players,
-    PlayerDetail
+    PlayerDetail,
+    Teams,
+    TeamDetail
   ],
   imports: [
     BrowserModule,
@@ -47,7 +53,9 @@ import {PlayerDetail} from "../pages/player-detail/player-detail";
     NewsItemsComponent,
     NewsItemDetailComponent,
     Players,
-    PlayerDetail
+    PlayerDetail,
+    Teams,
+    TeamDetail
   ],
   providers: [
     PlayerFacade,
@@ -56,6 +64,9 @@ import {PlayerDetail} from "../pages/player-detail/player-detail";
     NewsItemService,
     NewsItemControllerService,
     PlayerControllerService,
+    TeamControllerService,
+    TeamFacade,
+    TeamService,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

@@ -1,0 +1,40 @@
+<ion-content class="content" padding>
+  <button ion-button (click)="addTeam()" color="secondary" style="margin-bottom: 20px;">
+    + Voeg Team toe
+  </button>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngFor="let team of teamFacade.teams" style="margin-bottom: 20px;">
+    <ion-card>
+      <div style="display: flex; flex-direction: row;">
+        <div style="width: 75%;">
+          <ion-card-header class="planned-visits__card-title">
+            <p style="display: flex; flex-direction: row">
+              {{team.name}}
+            </p>
+          </ion-card-header>
+          <ion-card-content>
+            <p class="planned-visits__card-content">
+
+            </p>
+            <p class="planned-visits__card-content-inline">
+
+            </p>
+          </ion-card-content>
+        </div>
+        <div style="display: flex; width: auto;">
+          <div class="planned-visits__card-content-button-container" (click)="bewerken(team)" tappable>
+            <p class="planned-visits__card-content-button">Bewerken</p>
+          </div>
+          <div class="planned-visits__card-content-button-container" (click)="verwijderen(team)" tappable>
+            <p class="planned-visits__card-content-button">Verwijderen</p>
+          </div>
+        </div>
+      </div>
+    </ion-card>
+  </ion-list>
+</ion-content>
+

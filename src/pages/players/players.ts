@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Events, NavController, Refresher, ToastController} from "ionic-angular";
 import {Player} from "../../providers";
 import {EventChannels} from "../../core/constants/event-channels";
@@ -16,7 +16,7 @@ import {PlayerFacade} from "../../core/facade/player.facade";
   selector: 'page-players',
   templateUrl: 'players.html',
 })
-export class Players {
+export class Players implements OnInit, OnDestroy{
 
   private refresher: Refresher;
 
@@ -58,8 +58,8 @@ export class Players {
     this.navCtrl.push(PlayerDetail ,{ PLAYER : player});
   }
 
-  verwijderen(newsItem: Player) {
-    this.playerFacade.verwijderPlayer(newsItem);
+  verwijderen(player: Player) {
+    this.playerFacade.verwijderPlayer(player);
   }
 
   private showToast(message: string, duration: number){
