@@ -16,7 +16,7 @@ import {Player} from "../../providers";
   selector: 'page-player-detail',
   templateUrl: 'player-detail.html',
 })
-export class PlayerDetail implements OnInit, OnDestroy {
+export class PlayerDetail implements OnDestroy {
 
   @ViewChild('saveButton') saveButton;
 
@@ -36,17 +36,12 @@ export class PlayerDetail implements OnInit, OnDestroy {
 
     this.events.subscribe(EventChannels.CHANNEL_PLAYER_UPDATED,(isSaved: boolean)=>{
       this.showToast("Player opgeslagen", 2000);
-      //TODO RELOAD ITEM
     });
 
     this.events.subscribe(EventChannels.CHANNEL_PLAYER_CREATED, (player: Player)=>{
       this.showToast("Player aangemaakt", 2000);
       this.saveButtonText = 'Opslaan';
     });
-  }
-
-  ngOnInit() {
-
   }
 
   ngOnDestroy(): void {
