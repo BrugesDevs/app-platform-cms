@@ -54,7 +54,7 @@ export class Teams implements OnInit, OnDestroy{
   }
 
   bewerken(team: Team) {
-    this.navCtrl.push(TeamDetail ,{ TEAMS : team});
+    this.navCtrl.push(TeamDetail ,{ TEAM : team});
   }
 
   verwijderen(team: Team) {
