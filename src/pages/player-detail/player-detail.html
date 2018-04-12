@@ -1,16 +1,24 @@
 <p>
   <button ion-button type="submit" (click)="save()">{{saveButtonText}}</button>
-  <button (click)="goBack()" ion-button>go back</button>
+  <button (click)="goBack()" ion-button>Terug</button>
 </p>
 <ion-item>
   <ion-label>Voornaam</ion-label>
-  <ion-input type="text" [(ngModel)]="player.firstName"></ion-input>
+  <ion-input type="text" [(ngModel)]="facade.currentPlayer.firstName"></ion-input>
 </ion-item>
 <ion-item>
   <ion-label>Familienaam</ion-label>
-  <ion-input type="text" [(ngModel)]="player.lastName"></ion-input>
+  <ion-input type="text" [(ngModel)]="facade.currentPlayer.lastName"></ion-input>
 </ion-item>
 <ion-item>
   <ion-label>Spelersnummer</ion-label>
-  <ion-input type="text" [(ngModel)]="player.playerNumber"></ion-input>
+  <ion-input type="text" [(ngModel)]="facade.currentPlayer.playerNumber"></ion-input>
+</ion-item>
+<h1>{{facade.currentPlayer.firstName}} zit in de volgende teams</h1>
+<button ion-button (click)="showTeams()" color="secondary" style="margin-bottom: 20px;">
+  + Voeg team toe
+</button>
+<ion-item *ngFor="let team of facade.currentPlayer.teams">
+  <ion-label>{{team.name}}</ion-label>
+  <ion-checkbox checked="true" (ionChange)="removeTeam(team)"></ion-checkbox>
 </ion-item>

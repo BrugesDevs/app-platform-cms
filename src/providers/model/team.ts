@@ -9,9 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import {Player} from "./player";
 
 
 export class Team {
     id?: number;
     name?: string;
+    players?: Array<Player>;
 }

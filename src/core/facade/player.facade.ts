@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Player} from '../../providers/index';
+import {Player, Team} from '../../providers/index';
 import {Events} from "ionic-angular";
 import {EventChannels} from "../constants/event-channels";
 import {PlayerService} from "../service/player.service";
@@ -64,5 +64,22 @@ export class PlayerFacade {
         this.players.push(player);
         this.events.publish(EventChannels.CHANNEL_PLAYER_CREATED, player);
       });
+  }
+
+  removeTeam(team: Team) {
+    /*Optimistic revoval of item*/
+    var index = this.currentPlayer.teams.indexOf(team, 0);
+    if (index > -1) {
+      this.currentPlayer.teams.splice(index, 1);
+
+      //TODO DELETE SERVER SIDE
+      this.events.publish(EventChannels.CHANNEL_PLAYER_TEAM_DELETE, team);
+    } else {
+      //TODO INCONSISTENT STATE
+    }
+  }
+
+  addTeam(team: Team) {
+    this.currentPlayer.teams.push(team);
   }
 }

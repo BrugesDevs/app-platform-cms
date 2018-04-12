@@ -9,17 +9,19 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import {Team} from "./team";
 
 
 export class Player {
-    birthDate?: string;
-    firstName?: string;
-    id?: number;
-    lastName?: string;
-    nationality?: string;
-    playerNumber?: number;
+  birthDate?: string;
+  firstName?: string;
+  id?: number;
+  lastName?: string;
+  nationality?: string;
+  playerNumber?: number;
+  teams?: Array<Team>;
 
-    getFullName(): string{
-      return this.firstName + ' ' + this.lastName;
-    }
+  getFullName(): string {
+    return this.firstName + ' ' + this.lastName;
+  }
 }

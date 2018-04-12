@@ -1,7 +1,7 @@
 import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
 import "rxjs/add/operator/map";
-import {Player, PlayerControllerService} from "../../providers";
+import {Player, PlayerControllerService, Team} from "../../providers";
 
 @Injectable()
 export class PlayerService {
@@ -35,6 +35,7 @@ export class PlayerService {
 
   getPlayers(): Observable<Player[]> {
     return this.playerCtrl.retrieveAllPlayersUsingGET()
+      .map(values => this.addTeamsToPlayers(values))
       .map(values => {
         console.log('Loaded players: ', values);
         return values;
@@ -47,5 +48,27 @@ export class PlayerService {
         console.log('Saved player: ' + value);
         return value;
       });
+  }
+
+  addTeamsToPlayers(players: Player[]): Player[] {
+    for (let i = 0; i < players.length; i++) {
+      players[i] = this.addTeamsToPlayer(players[i]);
+    }
+    return players;
+  }
+
+  addTeamsToPlayer(player: Player): Player {
+    let teamNames = ["Brugge", "KV Oostende", "AA Gent", "Anderlecht", "KV Varsenare"];
+    let teamIds = [19,20,21,22,23];
+    let teams: Team[] = [];
+    let team;
+    for (let i = 0; i < teamNames.length; i++) {
+      team = new Team();
+      team.id = teamIds[i];
+      team.name = teamNames[i];
+      teams.push(team);
+    }
+    player.teams = teams;
+    return player;
   }
 }
