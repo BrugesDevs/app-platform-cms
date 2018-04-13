@@ -3,6 +3,8 @@ import {Player, Team} from '../../providers/index';
 import {Events} from "ionic-angular";
 import {EventChannels} from "../constants/event-channels";
 import {PlayerService} from "../service/player.service";
+import {TeamService} from "../service/team.service";
+import _ from "lodash";
 
 @Injectable()
 export class PlayerFacade {
@@ -10,8 +12,9 @@ export class PlayerFacade {
   players: Player[] = [];
   currentPlayer: Player;
 
-  constructor(private playerService: PlayerService, private events: Events) {
-
+  constructor(private playerService: PlayerService,
+              private teamService: TeamService,
+              private events: Events) {
   }
 
   loadPlayers(): void {
@@ -81,5 +84,24 @@ export class PlayerFacade {
 
   addTeam(team: Team) {
     this.currentPlayer.teams.push(team);
+    //TODO ADD TO SERVICE
+  }
+
+  addTeams(teams: Team[]) {
+    this.currentPlayer.teams= this.currentPlayer.teams.concat(teams);
+    //TODO ADD TO SERVICE
+  }
+
+  getTeamsWherePlayerIsNotPresent() {
+    this.teamService.getTeams()
+      .subscribe((teams: Team[]) => {
+        let filteredTeams = [];
+        for (let i = 0; i < teams.length; i++) {
+          if (this.currentPlayer.teams.map(x=>x.id).indexOf(teams[i].id) == -1){
+            filteredTeams.push(teams[i]);
+          }
+        }
+         this.events.publish(EventChannels.CHANNEL_PLAYER_FILTERED_TEAMS, filteredTeams);
+      });
   }
 }

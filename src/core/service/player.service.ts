@@ -58,8 +58,8 @@ export class PlayerService {
   }
 
   addTeamsToPlayer(player: Player): Player {
-    let teamNames = ["Brugge", "KV Oostende", "AA Gent", "Anderlecht", "KV Varsenare"];
-    let teamIds = [19,20,21,22,23];
+    let teamNames = ["Brugge", "KV Oostende"];
+    let teamIds = [19,20];
     let teams: Team[] = [];
     let team;
     for (let i = 0; i < teamNames.length; i++) {

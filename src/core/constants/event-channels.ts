@@ -22,7 +22,7 @@ export class EventChannels{
   public static CHANNEL_PLAYER_DELETED: string = 'player:deleted';
 
   public static CHANNEL_PLAYER_TEAM_DELETE: string = 'player:team:deleted';
-
+  public static CHANNEL_PLAYER_FILTERED_TEAMS: string = 'player:teams:filtered';
 
   /**TEAM EVENTS**/
   public static CHANNEL_TEAMS_UPDATE: string = 'teams:update';

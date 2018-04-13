@@ -1,9 +1,10 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {Events, NavController, NavParams, ToastController} from "ionic-angular";
+import {Events, ModalController, NavController, NavParams, ToastController} from "ionic-angular";
 import {NavigationParams} from "../../core/constants/navigation-params";
 import {EventChannels} from "../../core/constants/event-channels";
 import {PlayerFacade} from "../../core/facade/player.facade";
 import {Player, Team} from "../../providers";
+import {TeamToPlayer} from "../team-to-player/team-to-player";
 
 
 /**
@@ -26,6 +27,7 @@ export class PlayerDetail implements OnDestroy {
               private navCtrl: NavController,
               private navParams: NavParams,
               private toastCtrl: ToastController,
+              private modalCtrl: ModalController,
               private events: Events) {
     this.facade.currentPlayer = this.navParams.get(NavigationParams.PLAYER);
     if (!this.facade.currentPlayer) {
@@ -46,12 +48,31 @@ export class PlayerDetail implements OnDestroy {
       this.showUndoTeamToast("Speler " + this.facade.currentPlayer.firstName + " werd verwijderd uit team " +
         team.name, 3500, team);
     });
+
+    this.events.subscribe(EventChannels.CHANNEL_PLAYER_FILTERED_TEAMS, (filteredTeams) => {
+      if (filteredTeams.length > 0) {
+        this.showFilteredTeams(filteredTeams);
+      } else {
+        this.showToast(this.facade.currentPlayer.firstName + " zit in alle teams", 2000);
+      }
+    });
+  }
+
+  private showFilteredTeams(filteredTeams: Team[]) {
+    let modal = this.modalCtrl.create(TeamToPlayer, {items: filteredTeams});
+    modal.onDidDismiss((teams: Team[]) => {
+      if (teams) {
+        this.facade.addTeams(teams);
+      }
+    });
+    modal.present();
   }
 
   ngOnDestroy(): void {
     this.events.unsubscribe(EventChannels.CHANNEL_PLAYER_UPDATED);
     this.events.unsubscribe(EventChannels.CHANNEL_PLAYER_CREATED);
     this.events.unsubscribe(EventChannels.CHANNEL_PLAYER_TEAM_DELETE);
+    this.events.unsubscribe(EventChannels.CHANNEL_PLAYER_FILTERED_TEAMS);
     this.save();
   }
 
@@ -68,7 +89,7 @@ export class PlayerDetail implements OnDestroy {
   }
 
   showTeams() {
-    //TODO SHOW TEAMS DIALOG
+    this.facade.getTeamsWherePlayerIsNotPresent();
   }
 
   addTeam(team: Team) {

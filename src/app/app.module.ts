@@ -24,6 +24,7 @@ import {TeamService} from "../core/service/team.service";
 import {TeamFacade} from "../core/facade/team.facade";
 import {TeamDetail} from "../pages/team-detail/team-detail";
 import {Teams} from "../pages/teams/teams";
+import {TeamToPlayer} from "../pages/team-to-player/team-to-player";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {Teams} from "../pages/teams/teams";
     Players,
     PlayerDetail,
     Teams,
-    TeamDetail
+    TeamDetail,
+    TeamToPlayer
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import {Teams} from "../pages/teams/teams";
     Players,
     PlayerDetail,
     Teams,
-    TeamDetail
+    TeamDetail,
+    TeamToPlayer
   ],
   providers: [
     PlayerFacade,
