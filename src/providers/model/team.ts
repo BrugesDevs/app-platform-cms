@@ -10,10 +10,15 @@
  * Do not edit the class manually.
  */
 import {Player} from "./player";
+import {CheckboxSelectableInterface} from "../../core/interface/checkbox-selectable.interface";
 
 
-export class Team {
+export class Team implements CheckboxSelectableInterface{
     id?: number;
     name?: string;
     players?: Array<Player>;
+
+  getCheckboxName(): string {
+    return this.name;
+  }
 }

@@ -70,5 +70,9 @@ export class TeamDetail implements OnDestroy {
     });
     toast.present();
   }
+
+  showPlayers() {
+    //TODO SHOW TEAMS
+  }
 }
 

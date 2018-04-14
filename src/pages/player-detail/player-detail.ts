@@ -58,16 +58,6 @@ export class PlayerDetail implements OnDestroy {
     });
   }
 
-  private showFilteredTeams(filteredTeams: Team[]) {
-    let modal = this.modalCtrl.create(TeamToPlayer, {items: filteredTeams});
-    modal.onDidDismiss((teams: Team[]) => {
-      if (teams) {
-        this.facade.addTeams(teams);
-      }
-    });
-    modal.present();
-  }
-
   ngOnDestroy(): void {
     this.events.unsubscribe(EventChannels.CHANNEL_PLAYER_UPDATED);
     this.events.unsubscribe(EventChannels.CHANNEL_PLAYER_CREATED);
@@ -125,4 +115,15 @@ export class PlayerDetail implements OnDestroy {
 
     toast.present();
   }
+
+  private showFilteredTeams(filteredTeams: Team[]) {
+    let modal = this.modalCtrl.create(TeamToPlayer, {items: filteredTeams, message: "Voeg speler toe aan één of meerdere teams"});
+    modal.onDidDismiss((teams: Team[]) => {
+      if (teams) {
+        this.facade.addTeams(teams);
+      }
+    });
+    modal.present();
+  }
+
 }

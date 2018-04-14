@@ -10,9 +10,10 @@
  * Do not edit the class manually.
  */
 import {Team} from "./team";
+import {CheckboxSelectableInterface} from "../../core/interface/checkbox-selectable.interface";
 
 
-export class Player {
+export class Player implements CheckboxSelectableInterface{
   birthDate?: string;
   firstName?: string;
   id?: number;
@@ -23,5 +24,9 @@ export class Player {
 
   getFullName(): string {
     return this.firstName + ' ' + this.lastName;
+  }
+
+  getCheckboxName(): string {
+    return this.getFullName();
   }
 }

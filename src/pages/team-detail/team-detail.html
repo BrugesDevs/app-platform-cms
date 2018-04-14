@@ -6,3 +6,11 @@
   <ion-label>Team naam</ion-label>
   <ion-input type="text" [(ngModel)]="team.name"></ion-input>
 </ion-item>
+
+<h1>{{facade.currentTeam}} bestaat uit volgende spelers</h1>
+<button ion-button (click)="showPlayers()" color="secondary" style="margin-bottom: 20px;">
+  + Voeg speler toe
+</button>
+<ion-item *ngFor="let players of team.players">
+  <p>{{player.getFullName()}}</p>
+</ion-item>
