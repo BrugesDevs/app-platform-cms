@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavParams, ViewController} from "ionic-angular";
-import {Player} from "../../providers";
+import {CheckboxSelectableInterface} from "../../core/interface/checkbox-selectable.interface";
+import {Team} from "../../providers";
 
 /**
  * Generated class for the TeamToPlayer page.
@@ -9,14 +10,14 @@ import {Player} from "../../providers";
  * Ionic pages and navigation.
  */
 @Component({
-  selector: 'page-player-to-team',
-  templateUrl: 'player-to-team.html',
+  selector: 'page-check-box-dialog',
+  templateUrl: 'check-box-dialog.html',
 })
-export class PlayerToTeam {
+export class CheckBoxDialog {
 
   message: string = "";
-  items: Player[] = [];
-  addedItems: Player[] = [];
+  items: CheckboxSelectableInterface[] = [];
+  addedItems: CheckboxSelectableInterface[] = [];
 
   constructor(public navParams: NavParams, public viewCtrl: ViewController) {
     this.items = this.navParams.get('items');
@@ -31,11 +32,11 @@ export class PlayerToTeam {
     this.viewCtrl.dismiss();
   }
 
-  itemClicked(player: Player, selected: boolean) {
+  itemClicked(item: CheckboxSelectableInterface, selected: boolean) {
     if (selected) {
-      this.addedItems.push(player);
+      this.addedItems.push(item);
     } else {
-      var index = this.addedItems.indexOf(player, 0);
+      var index = this.addedItems.indexOf(item, 0);
       if (index > -1) {
         this.addedItems.splice(index, 1);
       }

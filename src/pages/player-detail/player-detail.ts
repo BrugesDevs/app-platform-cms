@@ -5,6 +5,7 @@ import {EventChannels} from "../../core/constants/event-channels";
 import {PlayerFacade} from "../../core/facade/player.facade";
 import {Player, Team} from "../../providers";
 import {TeamToPlayer} from "../team-to-player/team-to-player";
+import {CheckBoxDialog} from "../check-box-dialog/check-box-dialog.component";
 
 
 /**
@@ -117,7 +118,7 @@ export class PlayerDetail implements OnDestroy {
   }
 
   private showFilteredTeams(filteredTeams: Team[]) {
-    let modal = this.modalCtrl.create(TeamToPlayer, {items: filteredTeams, message: "Voeg speler toe aan één of meerdere teams"});
+    let modal = this.modalCtrl.create(CheckBoxDialog, {items: filteredTeams, message: "Voeg speler toe aan één of meerdere teams"});
     modal.onDidDismiss((teams: Team[]) => {
       if (teams) {
         this.facade.addTeams(teams);

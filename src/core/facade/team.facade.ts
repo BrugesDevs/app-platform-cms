@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Team} from '../../providers/index';
+import {Player, Team} from '../../providers/index';
 import {Events} from "ionic-angular";
 import {EventChannels} from "../constants/event-channels";
 import {TeamService} from "../service/team.service";
+import {PlayerService} from "../service/player.service";
 
 @Injectable()
 export class TeamFacade {
@@ -10,7 +11,7 @@ export class TeamFacade {
   teams: Team[] = [];
   currentTeam: Team;
 
-  constructor(private teamService: TeamService, private events: Events) {
+  constructor(private teamService: TeamService, private playerService: PlayerService, private events: Events) {
 
   }
 
@@ -64,5 +65,40 @@ export class TeamFacade {
         this.teams.push(team);
         this.events.publish(EventChannels.CHANNEL_TEAM_CREATED, team);
       });
+  }
+
+  addPlayer(player: Player) {
+    this.currentTeam.players.push(player);
+  }
+
+  getPlayersNotPresentInTeam() {
+    this.playerService.getPlayers()
+      .subscribe((players: Player[]) => {
+        let filteredPlayers = [];
+        for (let i = 0; i < players.length; i++) {
+          if (this.currentTeam.players.map(x => x.id).indexOf(players[i].id) == -1) {
+            filteredPlayers.push(players[i]);
+          }
+        }
+        this.events.publish(EventChannels.CHANNEL_TEAM_FILTERED_PLAYERS, filteredPlayers);
+      });
+  }
+
+  addPlayersToTeam(players: Player[]) {
+    this.currentTeam.players = this.currentTeam.players.concat(players);
+    //TODO SPEAK TO SERVICE
+  }
+
+  deletePlayer(player: Player) {
+    /*Optimistic revoval of item*/
+    var index = this.currentTeam.players.indexOf(player, 0);
+    if (index > -1) {
+      this.currentTeam.players.splice(index, 1);
+
+      //TODO DELETE SERVER SIDE
+      this.events.publish(EventChannels.CHANNEL_TEAM_PLAYER_DELETE, player);
+    } else {
+      //TODO INCONSISTENT STATE
+    }
   }
 }

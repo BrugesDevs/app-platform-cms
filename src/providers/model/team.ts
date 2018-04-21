@@ -18,7 +18,7 @@ export class Team implements CheckboxSelectableInterface{
     name?: string;
     players?: Array<Player>;
 
-  getCheckboxName(): string {
+  getTitle(): string {
     return this.name;
   }
 }

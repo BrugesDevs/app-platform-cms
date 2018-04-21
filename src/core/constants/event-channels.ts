@@ -33,4 +33,7 @@ export class EventChannels{
   public static CHANNEL_TEAM_CREATED: string = 'team:created';
   public static CHANNEL_TEAM_DELETED: string = 'team:deleted';
 
+  public static CHANNEL_TEAM_PLAYER_DELETE: string = 'team:players:deleted';
+  public static CHANNEL_TEAM_FILTERED_PLAYERS: string = 'team:players:filtered';
+
 }

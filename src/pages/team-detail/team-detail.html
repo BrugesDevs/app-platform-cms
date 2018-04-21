@@ -4,13 +4,26 @@
 </p>
 <ion-item>
   <ion-label>Team naam</ion-label>
-  <ion-input type="text" [(ngModel)]="team.name"></ion-input>
+  <ion-input type="text" [(ngModel)]="facade.currentTeam.name"></ion-input>
 </ion-item>
 
-<h1>{{facade.currentTeam}} bestaat uit volgende spelers</h1>
+<h1>{{facade.currentTeam.name}} bestaat uit volgende spelers</h1>
 <button ion-button (click)="showPlayers()" color="secondary" style="margin-bottom: 20px;">
   + Voeg speler toe
 </button>
-<ion-item *ngFor="let players of team.players">
-  <p>{{player.getFullName()}}</p>
-</ion-item>
+<br>
+<div *ngFor="let player of facade.currentTeam.players">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let n of [1,2]">
+        <ion-chip #chip2>
+          <ion-icon name="pin" color="primary"></ion-icon>
+          <ion-label>{{player.firstName}} {{player.lastName}}</ion-label>
+          <button ion-button clear (click)="deletePlayer(chip2, player)">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

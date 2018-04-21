@@ -23,10 +23,10 @@ export class Player implements CheckboxSelectableInterface{
   teams?: Array<Team>;
 
   getFullName(): string {
-    return this.firstName + ' ' + this.lastName;
+    return this.firstName + " " + this.lastName;
   }
 
-  getCheckboxName(): string {
+  getTitle(): string {
     return this.getFullName();
   }
 }

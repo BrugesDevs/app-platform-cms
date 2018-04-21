@@ -1,4 +1,4 @@
 
 export interface CheckboxSelectableInterface {
-  getCheckboxName(): string;
+  getTitle(): string;
 }
